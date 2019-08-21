@@ -1,0 +1,43 @@
+*> =======================================================
+*>
+*>	ODD_EVEN: Verifies if a given number is odd or even.
+*>
+*> =======================================================
+
+*> Program header and name -------------------------------
+IDENTIFICATION DIVISION.
+PROGRAM-ID. ODD_EVEN.
+
+*> Program data ------------------------------------------
+DATA DIVISION.
+
+	WORKING-STORAGE SECTION.
+	01 WS_NUMBER PIC 9(3).
+	01 WS_FACTOR PIC 9(3).
+	01 WS_RESULT PIC 9(3).
+
+*> Program procedures ------------------------------------
+PROCEDURE DIVISION.
+	
+	*> Main paragraph.
+	FIRST-PARAGRAPH.
+		
+		*> Reads the number.
+		ACCEPT WS_NUMBER. 
+		MOVE WS_NUMBER TO WS_FACTOR.
+		
+		*> Performs the mod division of the number.
+		PERFORM MOD-PARAGRAPH UNTIL WS_FACTOR < 2.
+
+        *> Verifies if the number is even or odd.
+		IF WS_FACTOR IS EQUAL TO 0 THEN
+			DISPLAY 'The number ' WS_NUMBER ' is even.'
+		ELSE
+			DISPLAY 'The number ' WS_NUMBER ' is odd.'
+		END-IF.
+
+		STOP RUN.
+
+    *> Recalculates the factor in order to find its parity.
+	MOD-PARAGRAPH.
+		COMPUTE WS_FACTOR = WS_FACTOR - 2.
