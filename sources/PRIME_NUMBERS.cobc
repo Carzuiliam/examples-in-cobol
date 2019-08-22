@@ -1,0 +1,60 @@
+*> =======================================================
+*>
+*>	PRIME_NUMBERS: Verifies if a given number is prime.
+*>
+*> =======================================================
+
+*> Program header and name -------------------------------
+IDENTIFICATION DIVISION.
+PROGRAM-ID. PRIME_NUMBERS.
+
+*> Program data ------------------------------------------
+DATA DIVISION.
+
+	WORKING-STORAGE SECTION.
+	01	WS_FACTOR	PIC	9(3).	
+	01	WS_NUMBER	PIC	9(3).
+	01	WS_MODVAL	PIC 9(3).
+	01	WS_RESULT	PIC	X(1).
+		88	WS_ISAPRIME	VALUE	'Y'.
+		88	WS_NOTPRIME	VALUE	'N'.
+
+*> Program procedures ------------------------------------
+PROCEDURE DIVISION.
+	
+	*> Main paragraph.
+	FIRST-PARAGRAPH.
+
+		*> Reads the number.
+		ACCEPT WS_NUMBER.
+		
+		*> Initializes the values.
+		MOVE 2 TO WS_FACTOR.
+		MOVE 'Y' TO WS_RESULT.
+
+		*> Performs a loop trying to find any factor of the number.
+		PERFORM UNTIL WS_FACTOR IS EQUAL TO WS_NUMBER
+			
+			MOVE WS_NUMBER TO WS_MODVAL
+		
+			PERFORM UNTIL WS_MODVAL IS LESS THAN WS_FACTOR
+				SUBTRACT WS_FACTOR FROM WS_MODVAL
+			END-PERFORM
+
+			IF WS_MODVAL IS EQUAL TO 0 THEN
+				MOVE 'N' TO WS_RESULT
+				MOVE WS_NUMBER TO WS_FACTOR
+			ELSE
+				ADD 1 TO WS_FACTOR
+			END-IF
+		
+		END-PERFORM.
+
+		*> Verifies if any divisor were found.
+		IF WS_ISAPRIME THEN
+			DISPLAY 'The number ' WS_NUMBER ' is prime.'
+		ELSE
+			DISPLAY 'The number ' WS_NUMBER ' is NOT prime.'
+		END-IF.
+
+	STOP RUN.

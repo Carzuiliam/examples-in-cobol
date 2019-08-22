@@ -4,7 +4,7 @@
 *>
 *> =======================================================
 
-*> Program header and name -------------------------------
+*> Header and name ---------------------------------------
 IDENTIFICATION DIVISION.
 PROGRAM-ID. ODD_EVEN.
 
@@ -12,9 +12,9 @@ PROGRAM-ID. ODD_EVEN.
 DATA DIVISION.
 
 	WORKING-STORAGE SECTION.
-	01 WS_NUMBER PIC 9(3).
-	01 WS_FACTOR PIC 9(3).
-	01 WS_RESULT PIC 9(3).
+	01	WS_NUMBER	PIC	9(3).
+	01	WS_FACTOR	PIC	9(3).
+	01	WS_RESULT	PIC	9(3).
 
 *> Program procedures ------------------------------------
 PROCEDURE DIVISION.
@@ -27,7 +27,9 @@ PROCEDURE DIVISION.
 		MOVE WS_NUMBER TO WS_FACTOR.
 		
 		*> Performs the mod division of the number.
-		PERFORM MOD-PARAGRAPH UNTIL WS_FACTOR < 2.
+		PERFORM UNTIL WS_FACTOR IS LESS THAN 2
+			SUBTRACT 2 FROM WS_FACTOR
+		END-PERFORM.
 
         *> Verifies if the number is even or odd.
 		IF WS_FACTOR IS EQUAL TO 0 THEN
@@ -36,8 +38,4 @@ PROCEDURE DIVISION.
 			DISPLAY 'The number ' WS_NUMBER ' is odd.'
 		END-IF.
 
-		STOP RUN.
-
-    *> Recalculates the factor in order to find its parity.
-	MOD-PARAGRAPH.
-		COMPUTE WS_FACTOR = WS_FACTOR - 2.
+	STOP RUN.
